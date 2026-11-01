@@ -1,0 +1,30 @@
+import { expect, test } from '@playwright/test';
+
+test('four-player court renders movement into runoffs and resets', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 1600 });
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await expect(page.locator('#start')).toBeEnabled();
+  await page.locator('#player-count').selectOption('4');
+  const court = page.locator('#court canvas');
+  await court.evaluate((element) => element.scrollIntoView({ block: 'center' }));
+  const initial = await court.screenshot({ path: test.info().outputPath('initial.png') });
+  await page.locator('#start').click();
+  await page.keyboard.down('KeyD');
+  await page.keyboard.down('KeyS');
+  await page.keyboard.down('ArrowLeft');
+  await page.keyboard.down('ArrowUp');
+  await expect.poll(async () => Number(await page.locator('#tick').textContent()), { timeout: 10000 }).toBeGreaterThan(180);
+  await page.keyboard.up('KeyD');
+  await page.keyboard.up('KeyS');
+  await page.keyboard.up('ArrowLeft');
+  await page.keyboard.up('ArrowUp');
+  await page.locator('#start').click();
+  expect((await court.screenshot()).equals(initial)).toBe(false);
+  await page.locator('#reset').click();
+  await expect(page.locator('#tick')).toHaveText('000000');
+  await court.evaluate((element) => element.scrollIntoView({ block: 'center' }));
+  expect((await court.screenshot({ path: test.info().outputPath('reset.png') })).equals(initial)).toBe(true);
+  expect(errors).toEqual([]);
+});
