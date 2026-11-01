@@ -1,0 +1,19 @@
+README.md
+  s_c689ac75a0dce4::t_00ff1654489c2e 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "9b5b57f08265a291969fa92e18b540ca0e3d0de6",
+  "prompts": {},
+  "sessions": {
+    "s_c689ac75a0dce4": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d1a6744b-1c97-4497-82ce-0caf256c386d",
+        "model": "unknown"
+      },
+      "human_author": "KozakoPolako <79322668+KozakoPolako@users.noreply.github.com>"
+    }
+  }
+}
