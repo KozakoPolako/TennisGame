@@ -1,0 +1,29 @@
+package-lock.json
+  s_c689ac75a0dce4::t_68bfd0b4d0c238 14,25-223
+.agents/instructions/core.instructions.md
+  s_c689ac75a0dce4::t_3be63ec84e3d51 5
+.agents/instructions/input.instructions.md
+  s_c689ac75a0dce4::t_c9378f65dd689d 5
+.agents/instructions/net.instructions.md
+  s_c689ac75a0dce4::t_7f910cb31f52cc 5
+.agents/instructions/render.instructions.md
+  s_c689ac75a0dce4::t_bb32a406636745 3-4,6
+.agents/instructions/tests.instructions.md
+  s_c689ac75a0dce4::t_ccb2556d500eb1 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "9845528f0cab309b83e8159087eb3984d0754777",
+  "prompts": {},
+  "sessions": {
+    "s_c689ac75a0dce4": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d1a6744b-1c97-4497-82ce-0caf256c386d",
+        "model": "copilot/claude-opus-5.5"
+      },
+      "human_author": "KozakoPolako <79322668+KozakoPolako@users.noreply.github.com>"
+    }
+  }
+}
