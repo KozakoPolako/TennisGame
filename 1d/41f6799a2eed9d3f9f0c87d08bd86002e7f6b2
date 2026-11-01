@@ -1,0 +1,166 @@
+.github/agents/tennis-game.agent.md
+  h_00a8f0dab7a74c 1-103
+.gitignore
+  h_00a8f0dab7a74c 1-7
+index.html
+  h_00a8f0dab7a74c 1-14
+package-lock.json
+  h_00a8f0dab7a74c 1-1649
+package.json
+  h_00a8f0dab7a74c 1-27
+playwright.config.ts
+  h_00a8f0dab7a74c 1-12
+src/audio/menu-audio.ts
+  h_00a8f0dab7a74c 1-31
+src/core/ball-machine.test.ts
+  h_00a8f0dab7a74c 1-108
+src/core/ball-machine.ts
+  h_00a8f0dab7a74c 1-64
+src/core/ball-motion.test.ts
+  h_00a8f0dab7a74c 1-57
+src/core/ball-motion.ts
+  h_00a8f0dab7a74c 1-65
+src/core/court-staff.test.ts
+  h_00a8f0dab7a74c 1-37
+src/core/court-staff.ts
+  h_00a8f0dab7a74c 1-53
+src/core/court.test.ts
+  h_00a8f0dab7a74c 1-49
+src/core/court.ts
+  h_00a8f0dab7a74c 1-13
+src/core/flat-shot.test.ts
+  h_00a8f0dab7a74c 1-165
+src/core/flat-shot.ts
+  h_00a8f0dab7a74c 1-54
+src/core/hit-cooldown.test.ts
+  h_00a8f0dab7a74c 1-101
+src/core/player-contact.test.ts
+  h_00a8f0dab7a74c 1-37
+src/core/player-contact.ts
+  h_00a8f0dab7a74c 1-42
+src/core/service-rules.test.ts
+  h_00a8f0dab7a74c 1-32
+src/core/service-rules.ts
+  h_00a8f0dab7a74c 1-21
+src/core/simulation.test.ts
+  h_00a8f0dab7a74c 1-36
+src/core/simulation.ts
+  h_00a8f0dab7a74c 1-226
+src/core/training.test.ts
+  h_00a8f0dab7a74c 1-178
+src/input/devices.ts
+  h_00a8f0dab7a74c 1-106
+src/main.ts
+  h_00a8f0dab7a74c 1-191
+src/net/config.ts
+  h_00a8f0dab7a74c 1-18
+src/render/court-projection.test.ts
+  h_00a8f0dab7a74c 1-74
+src/render/court-projection.ts
+  h_00a8f0dab7a74c 1-20
+src/render/court-renderer.ts
+  h_00a8f0dab7a74c 1-209
+src/render/crowd-animation.test.ts
+  h_00a8f0dab7a74c 1-35
+src/render/crowd-animation.ts
+  h_00a8f0dab7a74c 1-16
+src/render/draw-ball.test.ts
+  h_00a8f0dab7a74c 1-27
+src/render/draw-ball.ts
+  h_00a8f0dab7a74c 1-29
+src/render/draw-player.test.ts
+  h_00a8f0dab7a74c 1-28
+src/render/draw-player.ts
+  h_00a8f0dab7a74c 1-137
+src/render/net-animation.test.ts
+  h_00a8f0dab7a74c 1-24
+src/render/net-animation.ts
+  h_00a8f0dab7a74c 1-10
+src/render/net-profile.test.ts
+  h_00a8f0dab7a74c 1-29
+src/render/net-profile.ts
+  h_00a8f0dab7a74c 1-18
+src/render/player-animation.test.ts
+  h_00a8f0dab7a74c 1-37
+src/render/player-animation.ts
+  h_00a8f0dab7a74c 1-41
+src/render/player-facing.test.ts
+  h_00a8f0dab7a74c 1-125
+src/render/player-facing.ts
+  h_00a8f0dab7a74c 1-32
+src/render/racket-sprite.ts
+  h_00a8f0dab7a74c 1-50
+src/render/run-legs.test.ts
+  h_00a8f0dab7a74c 1-105
+src/render/run-legs.ts
+  h_00a8f0dab7a74c 1-74
+src/render/side-stands.test.ts
+  h_00a8f0dab7a74c 1-44
+src/render/side-stands.ts
+  h_00a8f0dab7a74c 1-60
+src/render/stadium.ts
+  h_00a8f0dab7a74c 1-179
+src/render/stroke-body.test.ts
+  h_00a8f0dab7a74c 1-77
+src/render/stroke-body.ts
+  h_00a8f0dab7a74c 1-77
+src/render/swing-animation.test.ts
+  h_00a8f0dab7a74c 1-116
+src/render/swing-animation.ts
+  h_00a8f0dab7a74c 1-32
+src/render/viewport.test.ts
+  h_00a8f0dab7a74c 1-44
+src/render/viewport.ts
+  h_00a8f0dab7a74c 1-12
+src/session/local-session.test.ts
+  h_00a8f0dab7a74c 1-19
+src/session/local-session.ts
+  h_00a8f0dab7a74c 1-41
+src/style.css
+  h_00a8f0dab7a74c 1-117
+src/ui/app-ui.ts
+  h_00a8f0dab7a74c 1-141
+src/ui/fullscreen.ts
+  h_00a8f0dab7a74c 1-72
+tests/charged-shot.spec.ts
+  h_00a8f0dab7a74c 1-55
+tests/court.spec.ts
+  h_00a8f0dab7a74c 1-30
+tests/fullscreen.spec.ts
+  h_00a8f0dab7a74c 1-96
+tests/layout.spec.ts
+  h_00a8f0dab7a74c 1-23
+tests/machine-settings.spec.ts
+  h_00a8f0dab7a74c 1-29
+tests/net-and-loose-balls.spec.ts
+  h_00a8f0dab7a74c 1-53
+tests/panorama.spec.ts
+  h_00a8f0dab7a74c 1-48
+tests/player-facing.spec.ts
+  h_00a8f0dab7a74c 1-98
+tests/prepared-footwork.spec.ts
+  h_00a8f0dab7a74c 1-65
+tests/stadium.spec.ts
+  h_00a8f0dab7a74c 1-82
+tests/stroke-recovery.spec.ts
+  h_00a8f0dab7a74c 1-78
+tests/training.spec.ts
+  h_00a8f0dab7a74c 1-57
+tsconfig.json
+  h_00a8f0dab7a74c 1-20
+vite.config.ts
+  h_00a8f0dab7a74c 1-6
+vitest.config.ts
+  h_00a8f0dab7a74c 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "1d41f6799a2eed9d3f9f0c87d08bd86002e7f6b2",
+  "prompts": {},
+  "humans": {
+    "h_00a8f0dab7a74c": {
+      "author": "KozakoPolako <79322668+KozakoPolako@users.noreply.github.com>"
+    }
+  }
+}
