@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openApp } from './support/app';
 
 for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }, { width: 844, height: 390 }, { width: 320, height: 480 }]) {
   test(`full-window court fits ${viewport.width}×${viewport.height} and restores controls`, async ({ page }) => {
@@ -56,28 +57,18 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
 }
 
 test('court markings are two logical pixels thick without changing the simulation', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('#start')).toBeEnabled();
+  await openApp(page);
   const widths = await page.evaluate(async () => {
-    const rendererPath = '/src/render/court-renderer.ts';
-    const simulationPath = '/src/core/simulation.ts';
-    const projectionPath = '/src/render/court-projection.ts';
-    const { CourtRenderer } = await import(rendererPath);
-    const { createState } = await import(simulationPath);
-    const { project, VIEW } = await import(projectionPath);
-    const container = document.createElement('div');
-    container.style.width = `${VIEW.width}px`;
-    document.body.append(container);
-    const renderer = new CourtRenderer();
-    await renderer.init(container);
-    const state = createState(2);
-    const snapshot = JSON.stringify(state);
-    renderer.draw(state);
+    const tennis = window.__tennis!;
+    const { VIEW, project } = tennis;
+    const preview = await tennis.openPreview({ id: 'markings-preview', players: 2, style: `width:${VIEW.width}px` });
+    const snapshot = JSON.stringify(preview.state);
+    preview.draw();
     const copy = document.createElement('canvas');
     copy.width = VIEW.width;
     copy.height = VIEW.height;
     const context = copy.getContext('2d')!;
-    context.drawImage(container.querySelector('canvas')!, 0, 0);
+    context.drawImage(preview.container.querySelector('canvas')!, 0, 0);
     const result = [0, 450, 1350, 1800].map((y) => {
       const point = project(350, y);
       const pixels = context.getImageData(point.x, point.y - 3, 1, 7).data;
@@ -87,9 +78,8 @@ test('court markings are two logical pixels thick without changing the simulatio
       }
       return count;
     });
-    if (snapshot !== JSON.stringify(state)) throw new Error('Renderer mutated the simulation');
-    renderer.dispose();
-    container.remove();
+    if (snapshot !== JSON.stringify(preview.state)) throw new Error('Renderer mutated the simulation');
+    tennis.closePreview();
     return result;
   });
   expect(widths).toEqual([2, 2, 2, 2]);

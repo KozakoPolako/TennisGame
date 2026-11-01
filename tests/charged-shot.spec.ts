@@ -3,11 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 test.use({ viewport: { width: 1440, height: 1600 } });
 
 async function playerClip(page: Page) {
-  const point = await page.evaluate(async () => {
-    const path = '/src/render/court-projection.ts';
-    const { project } = await import(path);
-    return project(500, 1500) as { x: number; y: number };
-  });
+  const point = await page.evaluate(() => window.__tennis!.project(500, 1500));
   const bounds = (await page.locator('#court canvas').boundingBox())!;
   const scale = bounds.width / 320;
   return { x: bounds.x + (point.x - 20) * scale, y: bounds.y + (point.y - 32) * scale, width: 40 * scale, height: 45 * scale };

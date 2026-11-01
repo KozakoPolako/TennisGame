@@ -1,11 +1,14 @@
 import './style.css';
 import { MenuAudio } from './audio/menu-audio';
 import { BALL_MACHINE, TICK_RATE, type PlayerCount } from './core/simulation';
+import { installTestApi } from './debug/test-api';
 import { InputDevices, mappingConflicts, type KeyboardMapping } from './input/devices';
 import { CourtRenderer } from './render/court-renderer';
 import { createBindings, LocalSession } from './session/local-session';
 import { formatKey, mountUI } from './ui/app-ui';
 import { bindFullscreen } from './ui/fullscreen';
+
+if (import.meta.env.DEV) installTestApi();
 
 async function bootstrap(): Promise<() => void> {
   const root = document.querySelector<HTMLDivElement>('#app');

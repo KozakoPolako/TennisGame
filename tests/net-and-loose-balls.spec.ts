@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
+import { openApp } from './support/app';
 
 test('training keeps old balls through successive machine feeds until reset', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('#start')).toBeEnabled();
+  await openApp(page);
   await page.locator('#player-count').selectOption('1');
   await page.locator('#start').click();
   await expect(page.locator('#training-status')).toContainText('Piłki na korcie: 2', { timeout: 15000 });
@@ -13,41 +13,25 @@ test('training keeps old balls through successive machine feeds until reset', as
 });
 
 test('net visibly deforms on contact and restores its resting shape', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('#start')).toBeEnabled();
+  await openApp(page);
   await page.evaluate(async () => {
-    const simulationPath = '/src/core/simulation.ts';
-    const rendererPath = '/src/render/court-renderer.ts';
-    const { createState } = await import(simulationPath);
-    const { CourtRenderer } = await import(rendererPath);
-    const container = document.createElement('div');
-    container.id = 'net-preview';
-    container.style.cssText = 'position:fixed;inset:0;width:640px;height:560px;z-index:100;background:#1b3635';
-    document.body.append(container);
-    const renderer = new CourtRenderer();
-    await renderer.init(container);
-    const state = createState(1);
-    renderer.draw(state);
-    Reflect.set(window, 'netPreview', { renderer, state });
+    const preview = await window.__tennis!.openPreview({ id: 'net-preview', players: 1 });
+    preview.draw();
   });
   const canvas = page.locator('#net-preview canvas');
   const resting = await canvas.screenshot();
   await page.evaluate(() => {
-    const { renderer, state } = Reflect.get(window, 'netPreview');
-    state.tick = 1;
-    state.netImpact = { tick: 1, x: 500, kind: 'mesh' };
-    renderer.draw(state);
+    const preview = window.__tennis!.preview!;
+    preview.state.tick = 1;
+    preview.state.netImpact = { tick: 1, x: 500, kind: 'mesh' };
+    preview.draw();
   });
   expect((await canvas.screenshot()).equals(resting)).toBe(false);
   await page.evaluate(() => {
-    const { renderer, state } = Reflect.get(window, 'netPreview');
-    state.tick = 37;
-    renderer.draw(state);
+    const preview = window.__tennis!.preview!;
+    preview.state.tick = 37;
+    preview.draw();
   });
   expect((await canvas.screenshot()).equals(resting)).toBe(true);
-  await page.evaluate(() => {
-    Reflect.get(window, 'netPreview').renderer.dispose();
-    document.querySelector('#net-preview')?.remove();
-    Reflect.deleteProperty(window, 'netPreview');
-  });
+  await page.evaluate(() => window.__tennis!.closePreview());
 });

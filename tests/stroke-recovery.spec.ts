@@ -1,29 +1,19 @@
 import { expect, test } from '@playwright/test';
+import { openApp } from './support/app';
 
 for (const id of [0, 1]) {
   for (const ballX of [300, 700]) {
     test(`player ${id + 1} holds the finish from ${ballX}, centers the racket and waits for a returning ball`, async ({ page }) => {
-      await page.goto('/');
-      await expect(page.locator('#start')).toBeEnabled();
+      await openApp(page);
       const position = await page.evaluate(async ({ id, ballX }) => {
-        const rendererPath = '/src/render/court-renderer.ts';
-        const simulationPath = '/src/core/simulation.ts';
-        const projectionPath = '/src/render/court-projection.ts';
-        const { CourtRenderer } = await import(rendererPath);
-        const { createState } = await import(simulationPath);
-        const { project } = await import(projectionPath);
-        const container = document.createElement('div');
-        container.id = 'stroke-preview';
-        container.style.cssText = 'position:fixed;inset:0;width:640px;height:560px;z-index:100;background:#1b3635';
-        document.body.append(container);
-        const renderer = new CourtRenderer();
-        await renderer.init(container);
-        const state = createState(2);
+        const tennis = window.__tennis!;
+        const preview = await tennis.openPreview({ id: 'stroke-preview', players: 2 });
+        const { state } = preview;
         state.tick = 1;
         state.ball = { x: ballX, y: 900, height: 100, velocityX: 0, velocityY: id === 0 ? -24 : 24, velocityZ: 0 };
-        renderer.draw(state);
-        Reflect.set(window, 'strokePreview', { state, renderer });
-        return project(state.players[id].x, state.players[id].y) as { x: number; y: number };
+        preview.draw();
+        const player = state.players[id]!;
+        return tennis.project(player.x, player.y);
       }, { id, ballX });
       const canvas = page.locator('#stroke-preview canvas');
       await expect(canvas).toHaveCSS('width', '640px');
@@ -32,10 +22,10 @@ for (const id of [0, 1]) {
       const ready = await page.screenshot({ clip });
       const incoming = async (velocityY: number): Promise<void> => {
         await page.evaluate((velocityY) => {
-          const { state, renderer } = Reflect.get(window, 'strokePreview');
-          state.ball.velocityY = velocityY;
-          state.tick++;
-          renderer.draw(state);
+          const preview = window.__tennis!.preview!;
+          preview.state.ball.velocityY = velocityY;
+          preview.state.tick++;
+          preview.draw();
         }, velocityY);
       };
       const direction = id === 0 ? 24 : -24;
@@ -44,12 +34,13 @@ for (const id of [0, 1]) {
       expect(prepared.equals(ready)).toBe(false);
       const age = async (age: number): Promise<void> => {
         await page.evaluate(({ id, age, direction }) => {
-          const { state, renderer } = Reflect.get(window, 'strokePreview');
-          state.tick = 10 + age;
-          state.players[id].swingTicks = Math.max(0, 12 - age);
-          state.players[id].hitCooldownTicks = Math.max(0, 30 - age);
-          state.ball.velocityY = age === 0 ? direction : -direction;
-          renderer.draw(state);
+          const preview = window.__tennis!.preview!;
+          const player = preview.state.players[id]!;
+          preview.state.tick = 10 + age;
+          player.swingTicks = Math.max(0, 12 - age);
+          player.hitCooldownTicks = Math.max(0, 30 - age);
+          preview.state.ball.velocityY = age === 0 ? direction : -direction;
+          preview.draw();
         }, { id, age, direction });
       };
       await age(0);
@@ -68,11 +59,7 @@ for (const id of [0, 1]) {
       expect((await page.screenshot({ clip })).equals(ready)).toBe(true);
       await incoming(direction);
       expect((await page.screenshot({ clip })).equals(prepared)).toBe(true);
-      await page.evaluate(() => {
-        Reflect.get(window, 'strokePreview').renderer.dispose();
-        document.querySelector('#stroke-preview')?.remove();
-        Reflect.deleteProperty(window, 'strokePreview');
-      });
+      await page.evaluate(() => window.__tennis!.closePreview());
     });
   }
 }

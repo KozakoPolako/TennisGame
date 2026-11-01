@@ -12,7 +12,7 @@ Twórz własne lub odpowiednio licencjonowane zasoby; nie kopiuj oryginalnych sp
 
 ## Architektura
 
-- `core` stan, fizyka, reguły · `input` urządzenia i mapowania · `session` sloty graczy i tryby · `net` połączenia, signaling, synchronizacja · `render` obraz · `audio` · `ui` menu i lobby · `main.ts` okablowanie.
+- `core` stan, fizyka, reguły · `input` urządzenia i mapowania · `session` sloty graczy i tryby · `net` połączenia, signaling, synchronizacja · `render` obraz · `audio` · `ui` menu i lobby · `debug` API testowe `window.__tennis` (tylko tryb dev) · `main.ts` okablowanie.
 - Core nie zależy od DOM, PixiJS, WebRTC ani urządzeń wejściowych. Ten sam rdzeń obsługuje grę lokalną i online.
 - Input ma wspólny format dla każdego gracza i ticka, niezależnie od klawiatury, pada lub sieci.
 - Efekty dźwiękowe i wizualne oddziel od symulacji, aby ponowne przeliczanie ticków nie duplikowało efektów.
@@ -25,7 +25,7 @@ Przed edycją przeczytaj odpowiedni plik z `.agents/instructions/`:
 - `src/input/**`, `src/session/**` → `input.instructions.md`
 - `src/net/**` lub praca nad trybem online → `net.instructions.md`
 - `src/render/**`, `src/ui/**`, `src/audio/**`, `src/style.css`, `index.html` → `render.instructions.md`
-- `src/**/*.test.ts`, `tests/**` → `tests.instructions.md`
+- `src/**/*.test.ts`, `tests/**`, `src/debug/**` → `tests.instructions.md`
 
 ## Komendy
 
