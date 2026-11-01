@@ -1,0 +1,33 @@
+.agents/instructions/core.instructions.md
+  s_c689ac75a0dce4::t_c2395df0045ca3 1-13
+.agents/instructions/input.instructions.md
+  s_c689ac75a0dce4::t_fed5880e724787 1-11
+.agents/instructions/net.instructions.md
+  s_c689ac75a0dce4::t_603f98c1e9ef2b 1-31
+.agents/instructions/render.instructions.md
+  s_c689ac75a0dce4::t_d5c2e62f335102 1-10
+.agents/instructions/tests.instructions.md
+  s_c689ac75a0dce4::t_36cb0a82891934 1-10
+.github/agents/tennis-game.agent.md
+  s_c689ac75a0dce4::t_0b7313a455703e 18,20
+AGENTS.md
+  s_c689ac75a0dce4::t_66df97dc54d87e 1-43
+CLAUDE.md
+  s_c689ac75a0dce4::t_00963574b05665 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "4b4af4274554dc4001d0754ba55b6c7e9d1ca9f7",
+  "prompts": {},
+  "sessions": {
+    "s_c689ac75a0dce4": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d1a6744b-1c97-4497-82ce-0caf256c386d",
+        "model": "unknown"
+      },
+      "human_author": "KozakoPolako <79322668+KozakoPolako@users.noreply.github.com>"
+    }
+  }
+}
