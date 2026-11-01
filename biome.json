@@ -1,0 +1,63 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": { "includes": ["src/**", "tests/**", "*.ts", "!src/style.css"] },
+  "formatter": { "enabled": false },
+  "assist": { "enabled": false },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": { "noNonNullAssertion": "off" }
+    }
+  },
+  "plugins": [{ "path": "./lint/core-determinism.grit", "includes": ["src/core/**"] }],
+  "overrides": [
+    {
+      "includes": ["src/core/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "Date": "Core is deterministic: use tick numbers instead of wall-clock time.",
+                  "performance": "Core is deterministic: use tick numbers instead of wall-clock time.",
+                  "window": "Core must not depend on the DOM.",
+                  "document": "Core must not depend on the DOM.",
+                  "navigator": "Core must not depend on input devices or the DOM.",
+                  "requestAnimationFrame": "Core must not depend on the render loop.",
+                  "setTimeout": "Core is advanced only by step().",
+                  "setInterval": "Core is advanced only by step().",
+                  "RTCPeerConnection": "Core must not depend on WebRTC."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/core/**", "!src/core/**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": { "pixi.js": "Core must not depend on PixiJS; rendering belongs to src/render." },
+                "patterns": [
+                  {
+                    "group": ["**/render/**", "**/ui/**", "**/input/**", "**/net/**", "**/audio/**", "**/session/**", "**/main"],
+                    "message": "Core must not import from outer layers (render, ui, input, net, audio, session, main)."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

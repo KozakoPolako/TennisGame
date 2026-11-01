@@ -2,6 +2,7 @@
 description: "Use when editing the deterministic tennis simulation: physics, ball flight, bounces, scoring, service rules, step(), checksum, replay, fixed tick, seeded RNG."
 applyTo: "src/core/**"
 ---
+
 # Rdzeń symulacji
 
 - Stały krok, docelowo 60 Hz (`TICK_RATE`), niezależny od częstotliwości renderowania.

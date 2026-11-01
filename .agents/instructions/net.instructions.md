@@ -2,6 +2,7 @@
 description: "Use when working on online play: WebRTC, DataChannel, manual signaling codes, offer/answer, ICE, STUN/TURN, peer topology, lockstep, rollback, input sync, desync detection."
 applyTo: "src/net/**"
 ---
+
 # Ręczny signaling WebRTC
 
 1. Host tworzy połączenie i DataChannel, generuje offer oraz ustawia localDescription.

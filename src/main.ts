@@ -145,6 +145,7 @@ async function bootstrap(): Promise<() => void> {
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); }, options);
 
   const refreshPads = (): void => {
+    // biome-ignore lint/complexity/useOptionalChain: a type predicate must return boolean, not undefined
     pads = Array.from(navigator.getGamepads?.() ?? []).filter((pad): pad is Gamepad => pad !== null && pad.connected);
     const signature = JSON.stringify(pads.map((pad) => [pad.index, pad.id, pad.mapping]));
     if (signature === deviceSignature) return;

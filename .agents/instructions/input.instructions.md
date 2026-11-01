@@ -2,6 +2,7 @@
 description: "Use when working on local players, keyboard and gamepad input, device-to-slot assignment, key mapping conflicts, controller connect/disconnect, dead zones."
 applyTo: ["src/input/**", "src/session/**"]
 ---
+
 # Lokalni gracze i kontrolery
 
 - Rozdziel pojęcia gracza, urządzenia wejściowego i peera sieciowego. Jedna przeglądarka może obsługiwać kilku lokalnych graczy.

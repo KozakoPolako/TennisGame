@@ -2,6 +2,7 @@
 description: "Use when writing or fixing Vitest unit tests or Playwright E2E tests: physics, scoring, service, replay, determinism, signaling code validation, network failure cases."
 applyTo: ["src/**/*.test.ts", "tests/**"]
 ---
+
 # Testy
 
 - Vitest: testy obok modułu (`src/**/*.test.ts`), środowisko node, bez DOM.

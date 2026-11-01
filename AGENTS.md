@@ -5,18 +5,22 @@ Przeglądarkowa gra tenisowa inspirowana Super Tennis (SNES): retro pixel art, c
 Twórz własne lub odpowiednio licencjonowane zasoby; nie kopiuj oryginalnych sprite'ów, muzyki ani znaków gry.
 
 ## Stos
+
 - TypeScript strict, Vite, PixiJS (render 2D), Vitest (logika), Playwright (przeglądarka).
 - Własna symulacja tenisa zamiast silnika fizycznego; natywne Gamepad API i RTCPeerConnection.
 - Biblioteki pomocnicze tylko, gdy uzasadniają dodatkową zależność. Nie zastępuj istniejącego stosu.
 
 ## Architektura
+
 - `core` stan, fizyka, reguły · `input` urządzenia i mapowania · `session` sloty graczy i tryby · `net` połączenia, signaling, synchronizacja · `render` obraz · `audio` · `ui` menu i lobby · `main.ts` okablowanie.
 - Core nie zależy od DOM, PixiJS, WebRTC ani urządzeń wejściowych. Ten sam rdzeń obsługuje grę lokalną i online.
 - Input ma wspólny format dla każdego gracza i ticka, niezależnie od klawiatury, pada lub sieci.
 - Efekty dźwiękowe i wizualne oddziel od symulacji, aby ponowne przeliczanie ticków nie duplikowało efektów.
 
 ## Zasady modułów
+
 Przed edycją przeczytaj odpowiedni plik z `.agents/instructions/`:
+
 - `src/core/**` → `core.instructions.md`
 - `src/input/**`, `src/session/**` → `input.instructions.md`
 - `src/net/**` lub praca nad trybem online → `net.instructions.md`
@@ -24,15 +28,19 @@ Przed edycją przeczytaj odpowiedni plik z `.agents/instructions/`:
 - `src/**/*.test.ts`, `tests/**` → `tests.instructions.md`
 
 ## Komendy
+
 - `npm run test` – Vitest; pojedynczy plik: `npx vitest run src/core/simulation.test.ts`
+- `npm run lint` – Biome; w `src/core/**` blokuje m.in. `Math.random`, nieprzenośne funkcje `Math`, `Date`, `performance`, DOM i importy z warstw zewnętrznych (`biome.json`, `lint/core-determinism.grit`).
 - `npm run typecheck`, `npm run build`
 - `npm run test:e2e` – Playwright (sam startuje `npm run dev`); pojedynczy: `npx playwright test tests/court.spec.ts`
 - `npm run check` – wszystko powyżej; uruchom po zmianach.
 
 ## Otwarte decyzje
+
 Liczba urządzeń online, model synchronizacji i szczegółowe zasady meczu wymagają jeszcze decyzji. Nie przedstawiaj ich jako uzgodnionych.
 
 ## Sposób pracy
+
 - Odpowiadaj po polsku, krótko i konkretnie. Nazwy symboli w kodzie po angielsku.
 - Najpierw sprawdź istniejące pliki i instrukcje. Nie zakładaj, że opisany moduł jest już zaimplementowany.
 - Realizuj bieżące polecenie, nie cały projekt naraz. Przy istotnej niejasności zakresu zapytaj; przy drobnych decyzjach wybierz najprostsze rozwiązanie zgodne z założeniami.
